@@ -1,0 +1,3 @@
+export enum InfoMessage {
+  DB_CONNECTION_SUCCESS = 'DATABASE CONNECTED SUCCESSFULLY.',
+}
