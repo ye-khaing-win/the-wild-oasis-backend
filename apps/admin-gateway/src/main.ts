@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { Logger } from 'nestjs-pino';
 import { EnvVariable } from './enums';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { HttpExceptionFilter, RpcExceptionInterceptor } from '@app/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AdminGatewayModule);
@@ -26,12 +27,16 @@ async function bootstrap() {
   });
 
   // Validation Pipe
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-    }),
-  );
+  // app.useGlobalPipes(
+  //   new ValidationPipe({
+  //     transform: true,
+  //     whitelist: true,
+  //   }),
+  // );
+
+  app.useGlobalFilters(new HttpExceptionFilter(logger));
+
+  app.useGlobalInterceptors(new RpcExceptionInterceptor());
 
   await app.listen(PORT, () => {
     logger.log(

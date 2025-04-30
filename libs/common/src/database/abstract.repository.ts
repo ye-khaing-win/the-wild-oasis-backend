@@ -78,9 +78,7 @@ export abstract class AbstractRepository<T extends AbstractDocument> {
     return doc;
   }
 
-  async exists(filter: FilterQuery<T>): Promise<boolean> {
-    const doc = await this.model.exists(filter);
-
-    return Boolean(doc);
+  async exists(filter: FilterQuery<T>) {
+    return this.model.exists(filter);
   }
 }

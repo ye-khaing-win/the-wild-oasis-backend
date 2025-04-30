@@ -3,36 +3,39 @@ import { HydratedDocument } from 'mongoose';
 import { AbstractDocument } from '@app/common';
 
 @Schema({
-  collection: 'cabins',
+  collection: 'files',
   versionKey: false,
   timestamps: true,
   toJSON: { virtuals: true },
   toObject: { virtuals: true },
 })
-export class Cabin extends AbstractDocument {
+export class File extends AbstractDocument {
   @Prop({
     required: true,
     unique: true,
   })
   name: string;
 
-  @Prop()
-  description: string;
-
-  @Prop()
-  capacity: number;
-
-  @Prop()
-  price: number;
-
-  @Prop()
-  discount: number;
+  @Prop({
+    required: true,
+  })
+  originalName: string;
 
   @Prop({
     required: true,
   })
-  imageId: string;
+  type: string;
+
+  @Prop({
+    required: true,
+  })
+  size: number;
+
+  @Prop({
+    required: true,
+  })
+  url: string;
 }
 
-export type CabinDocument = HydratedDocument<Cabin>;
-export const CabinSchema = SchemaFactory.createForClass(Cabin);
+export type FileDocument = HydratedDocument<File>;
+export const FileSchema = SchemaFactory.createForClass(File);

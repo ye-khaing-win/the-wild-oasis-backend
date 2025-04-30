@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { DatabaseModule, EnvVariable } from '@app/common';
+import { DatabaseModule } from '@app/common';
 import { CabinsModule } from './cabins/cabins.module';
+import { EnvVariable } from './enums';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CabinsModule } from './cabins/cabins.module';
       validationSchema: Joi.object({
         [EnvVariable.NODE_ENV]: Joi.string().required(),
         [EnvVariable.MONGODB_URI]: Joi.string().required(),
+        [EnvVariable.UPLOAD_TCP_PORT]: Joi.number().default(9009),
       }),
     }),
     DatabaseModule,

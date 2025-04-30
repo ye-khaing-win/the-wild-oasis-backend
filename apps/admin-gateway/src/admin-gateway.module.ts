@@ -14,6 +14,7 @@ import { LoggerModule } from '@app/common';
         [EnvVariable.NODE_ENV]: Joi.string().default('development'),
         [EnvVariable.HTTP_PORT]: Joi.number().default(4000),
         [EnvVariable.CABIN_TCP_PORT]: Joi.number().default(9000),
+        [EnvVariable.UPLOAD_TCP_PORT]: Joi.number().default(9009),
       }),
     }),
     LoggerModule,

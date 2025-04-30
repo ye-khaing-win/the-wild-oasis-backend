@@ -1,22 +1,19 @@
 import { NestFactory } from '@nestjs/core';
-import { CabinModule } from './cabin.module';
+import { UploadModule } from './upload.module';
 import {
   AsyncMicroserviceOptions,
   RpcException,
   Transport,
 } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
-import {
-  AllExceptionsFilter,
-  EnvVariable,
-  RpcLoggingInterceptor,
-} from '@app/common';
+import { EnvVariable } from './enums';
 import { Logger } from 'nestjs-pino';
 import { ValidationPipe } from '@nestjs/common';
+import { AllExceptionsFilter, RpcLoggingInterceptor } from '@app/common';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<AsyncMicroserviceOptions>(
-    CabinModule,
+    UploadModule,
     {
       useFactory: (config: ConfigService) => ({
         transport: Transport.TCP,
