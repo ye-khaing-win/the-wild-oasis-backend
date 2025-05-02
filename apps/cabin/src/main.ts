@@ -6,13 +6,10 @@ import {
   Transport,
 } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
-import {
-  AllExceptionsFilter,
-  EnvVariable,
-  RpcLoggingInterceptor,
-} from '@app/common';
+import { AllExceptionsFilter, RpcLoggingInterceptor } from '@app/common';
 import { Logger } from 'nestjs-pino';
 import { ValidationPipe } from '@nestjs/common';
+import { EnvVariable } from './enums';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<AsyncMicroserviceOptions>(

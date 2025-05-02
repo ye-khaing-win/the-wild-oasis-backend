@@ -27,12 +27,12 @@ async function bootstrap() {
   });
 
   // Validation Pipe
-  // app.useGlobalPipes(
-  //   new ValidationPipe({
-  //     transform: true,
-  //     whitelist: true,
-  //   }),
-  // );
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  );
 
   app.useGlobalFilters(new HttpExceptionFilter(logger));
 

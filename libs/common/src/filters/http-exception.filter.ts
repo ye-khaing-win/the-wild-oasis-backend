@@ -16,7 +16,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
-    const message = exception?.response?.message || exception.message;
+    let message = exception?.response?.message || exception.message;
+
+    if (message instanceof Array) {
+      message = message
+        .map(
+          (sentence) =>
+            sentence.charAt(0).toUpperCase() + sentence.slice(1) + '.',
+        )
+        .join(' ');
+    }
 
     this.logger.error(exception);
 

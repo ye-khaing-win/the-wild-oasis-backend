@@ -1,5 +1,5 @@
 export enum EnvVariable {
   NODE_ENV = 'NODE_ENV',
   MONGODB_URI = 'MONGODB_URI',
-  UPLOAD_TCP_PORT = 'UPLOAD_TCP_PORT',
+  TCP_PORT = 'TCP_PORT',
 }

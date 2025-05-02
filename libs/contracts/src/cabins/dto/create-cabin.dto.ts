@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  IsUrl,
 } from 'class-validator';
 
 export class CreateCabinDto {
@@ -28,6 +29,6 @@ export class CreateCabinDto {
   discount: number;
 
   @IsNotEmpty()
-  @IsMongoId()
-  imageId: string;
+  @IsUrl()
+  imageUrl: string;
 }

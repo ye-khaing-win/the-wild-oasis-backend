@@ -1,14 +1,16 @@
 import { Controller } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { FILES_PATTERNS } from '@app/contracts';
+import { FileDto, FILES_PATTERNS, UploadFileDto } from '@app/contracts';
+import { Serialize } from '@app/common/decorators';
 
 @Controller()
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
+  @Serialize(FileDto)
   @MessagePattern({ cmd: FILES_PATTERNS.UPLOAD })
-  upload(@Payload() file: Express.Multer.File) {
+  upload(@Payload() file: UploadFileDto) {
     return this.filesService.upload(file);
   }
 }

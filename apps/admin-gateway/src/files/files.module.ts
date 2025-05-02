@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { CabinsService } from './cabins.service';
-import { CabinsController } from './cabins.controller';
+import { FilesService } from './files.service';
+import { FilesController } from './files.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { CABIN_CLIENT } from '../clients/constatns';
+import { UPLOAD_CLIENT } from '../clients/constatns';
 import { ConfigService } from '@nestjs/config';
 import { EnvVariable } from '../enums';
 
@@ -10,18 +10,18 @@ import { EnvVariable } from '../enums';
   imports: [
     ClientsModule.registerAsync([
       {
-        name: CABIN_CLIENT,
+        name: UPLOAD_CLIENT,
         useFactory: (config: ConfigService) => ({
           transport: Transport.TCP,
           options: {
-            port: +config.get<number>(EnvVariable.CABIN_TCP_PORT),
+            port: config.get<number>(EnvVariable.UPLOAD_TCP_PORT),
           },
         }),
         inject: [ConfigService],
       },
     ]),
   ],
-  controllers: [CabinsController],
-  providers: [CabinsService],
+  controllers: [FilesController],
+  providers: [FilesService],
 })
-export class CabinsModule {}
+export class FilesModule {}

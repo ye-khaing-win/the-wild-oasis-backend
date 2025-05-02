@@ -26,11 +26,12 @@ export class S3Service implements OnModuleInit {
     });
   }
 
-  async upload(fileName: string, file: Express.Multer.File): Promise<string> {
+  async upload(
+    fileName: string,
+    file: { buffer: Buffer<ArrayBufferLike>; mimetype: string },
+  ): Promise<string> {
     const { bucket, folder, region } = this.options;
     const { buffer, mimetype } = file;
-
-    console.log(file);
 
     try {
       const Key = `${folder}/${fileName}`;
@@ -48,7 +49,7 @@ export class S3Service implements OnModuleInit {
 
       return url;
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw error;
     }
   }
 }

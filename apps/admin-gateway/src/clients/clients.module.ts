@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import {
   ClientsModule as NestClientsModule,
   Transport,
@@ -7,6 +7,7 @@ import { CABIN_CLIENT } from './constatns';
 import { ConfigService } from '@nestjs/config';
 import { EnvVariable } from '../enums';
 
+@Global()
 @Module({
   imports: [
     NestClientsModule.registerAsync([

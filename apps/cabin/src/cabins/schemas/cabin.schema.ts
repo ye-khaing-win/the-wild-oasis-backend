@@ -31,7 +31,7 @@ export class Cabin extends AbstractDocument {
   @Prop({
     required: true,
   })
-  imageId: string;
+  imageUrl: string;
 }
 
 export type CabinDocument = HydratedDocument<Cabin>;
